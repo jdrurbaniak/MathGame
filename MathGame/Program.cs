@@ -1,5 +1,6 @@
 ﻿const string mathGameLogo = $"\t---Math Game---\n";
 string? playerName = null;
+var gamesList = new List<string>();
 
 MainMenu();
 void ShowHeaderAndClearScreen()
@@ -18,7 +19,7 @@ void MainMenu()
 
     var date = DateTime.UtcNow;
     ShowHeaderAndClearScreen();
-    Console.WriteLine($"Hello {playerName}! It's currently {date.ToLocalTime()}");
+    Console.WriteLine($"Hello {playerName}! It's currently {date.ToLocalTime().DayOfWeek}");
 
     string? choiceInput = null;
     bool exit = false;
@@ -27,13 +28,13 @@ void MainMenu()
 
     while (exit == false)
     {
-        int choiceDisplayNumber = 1;
         Console.WriteLine($@"Choose from these options:
-{choiceDisplayNumber++} - Addition
-{choiceDisplayNumber++} - Subtraction
-{choiceDisplayNumber++} - Multiplication
-{choiceDisplayNumber++} - Division
-{choiceDisplayNumber++} - Quit");
+1 - Addition game
+2 - Subtraction game
+3 - Multiplication game
+4 - Division game
+5 - Show records of past games
+6 - Quit");
         choiceInput = Console.ReadLine().Trim().ToLower();
         Console.Clear();
         switch (choiceInput)
@@ -51,6 +52,12 @@ void MainMenu()
                 Game(GameType.Division);
                 break;
             case "5":
+                ShowHeaderAndClearScreen();
+                ShowGameRecords();
+                PausePrompt();
+                ShowHeaderAndClearScreen();
+                break;
+            case "6":
             case "q":
             case "exit":
                 exit = true;
@@ -178,7 +185,8 @@ void Game(GameType gameType)
         if (playerScore > requiredScoreToWin)
         {
             continuePlaying = false;
-            Console.WriteLine($"You've reached {requiredScoreToWin} points.");
+            gamesList.Add($"{DateTime.Now} - {gameType}:".PadLeft(20) + $"Game won with {playerScore} points, on {difficulty} difficulty");
+            Console.WriteLine($"You've reached {playerScore} points.");
             Console.WriteLine($"Congratulations {playerName}! You've won!");
             PausePrompt();
             ShowHeaderAndClearScreen();
@@ -186,6 +194,7 @@ void Game(GameType gameType)
         else if (playerScore <= 0)
         {
             continuePlaying = false;
+            gamesList.Add($"{DateTime.Now} - {gameType}:".PadRight(38) + $"Game lost with {playerScore} points, on {difficulty} difficulty");
             Console.WriteLine("You have 0 points. You lose.");
             PausePrompt();
             ShowHeaderAndClearScreen();
@@ -225,6 +234,21 @@ Difficulties DifficultySelection()
         }
     }
     return Difficulties.Medium; // Default value, all code paths must return a value
+}
+
+void ShowGameRecords()
+{
+    if(gamesList.Count == 0)
+    {
+        Console.WriteLine("You have no past games. ");
+    }
+    else
+    {
+        foreach (var game in gamesList)
+        {
+            Console.WriteLine(game);
+        }
+    }
 }
 
 string TruncateAfterSubstring(string text, string substring)
