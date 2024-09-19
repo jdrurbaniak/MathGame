@@ -4,8 +4,6 @@ namespace MathGame
 {
     internal class GameEngine
     {
-        internal enum Difficulties { Easy, Medium, Hard };
-        internal enum GameType { Addition, Subtraction, Multiplication, Division };
         internal List<Game> gamesList = new();
         Difficulties DifficultySelection()
         {
