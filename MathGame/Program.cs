@@ -95,12 +95,12 @@ void Game(GameType gameType)
         case Difficulties.Hard:
             requiredScoreToWin = 225;
             negativeNumbersAllowed = true;
-            maximumValue = 1000;
+            maximumValue = (gameType == GameType.Division) ? 50 : 1000;
             break;
         default:
             requiredScoreToWin = 200;
             negativeNumbersAllowed = false;
-            maximumValue = 100;
+            maximumValue = (gameType == GameType.Division) ? 25 : 100;
             break;
     }
 
@@ -112,11 +112,24 @@ void Game(GameType gameType)
     {
         Console.WriteLine($"{playerName}'s score: {playerScore}");
         Random random = new Random();
-        int firstNumber = random.Next(1, maximumValue + 1);
-        int secondNumber = random.Next(1, maximumValue + 1);
+        int firstNumber = 0, secondNumber = 0;
+        secondNumber = random.Next(1, maximumValue + 1);
+
+        if (gameType == GameType.Division)
+        {
+            firstNumber = random.Next(1, (maximumValue*2)/secondNumber + 1) * secondNumber;
+        }
+        else
+        {
+            
+            firstNumber = random.Next(1, maximumValue + 1);
+        }
+        
         int numberFromPlayer = 0;
         string firstNumberFormatted = firstNumber.ToString();
         string secondNumberFormatted = secondNumber.ToString();
+
+        
 
         if (negativeNumbersAllowed)
         {
@@ -140,8 +153,6 @@ void Game(GameType gameType)
         {
             Console.Write($"{firstNumberFormatted} {signs[(int)gameType]} {secondNumberFormatted} = ");
             userInput = Console.ReadLine().Trim();
-            userInput = TruncateAfterSubstring(userInput, ".");
-            userInput = TruncateAfterSubstring(userInput, ",");
 
             if (int.TryParse(userInput, out numberFromPlayer) == false)
             {
@@ -251,14 +262,14 @@ void ShowGameRecords()
     }
 }
 
-string TruncateAfterSubstring(string text, string substring)
-{
-    if(text.Contains(substring))
-    {
-        text = text.Remove(text.IndexOf(substring));
-    }
-    return text;
-}
+//string TruncateAfterSubstring(string text, string substring)
+//{
+//    if(text.Contains(substring))
+//    {
+//        text = text.Remove(text.IndexOf(substring));
+//    }
+//    return text;
+//}
 void PausePrompt()
 {
     Console.WriteLine("Press any button to continue");
