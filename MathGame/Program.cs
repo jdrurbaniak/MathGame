@@ -117,19 +117,19 @@ void Game(GameType gameType)
 
         if (gameType == GameType.Division)
         {
-            firstNumber = random.Next(1, (maximumValue*2)/secondNumber + 1) * secondNumber;
+            firstNumber = random.Next(1, (maximumValue * 2) / secondNumber + 1) * secondNumber;
         }
         else
         {
-            
+
             firstNumber = random.Next(1, maximumValue + 1);
         }
-        
+
         int numberFromPlayer = 0;
         string firstNumberFormatted = firstNumber.ToString();
         string secondNumberFormatted = secondNumber.ToString();
 
-        
+
 
         if (negativeNumbersAllowed)
         {
@@ -249,7 +249,7 @@ Difficulties DifficultySelection()
 
 void ShowGameRecords()
 {
-    if(gamesList.Count == 0)
+    if (gamesList.Count == 0)
     {
         Console.WriteLine("You have no past games. ");
     }
