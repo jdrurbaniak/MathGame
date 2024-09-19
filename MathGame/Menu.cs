@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MathGame.Models;
 
 namespace MathGame
 {
@@ -30,16 +26,16 @@ namespace MathGame
                 switch (choiceInput)
                 {
                     case "1":
-                        engine.StartGame(GameEngine.GameType.Addition, playerName);
+                        engine.StartGame(GameType.Addition, playerName);
                         break;
                     case "2":
-                        engine.StartGame(GameEngine.GameType.Subtraction, playerName);
+                        engine.StartGame(GameType.Subtraction, playerName);
                         break;
                     case "3":
-                        engine.StartGame(GameEngine.GameType.Multiplication, playerName);
+                        engine.StartGame(GameType.Multiplication, playerName);
                         break;
                     case "4":
-                        engine.StartGame(GameEngine.GameType.Division, playerName);
+                        engine.StartGame(GameType.Division, playerName);
                         break;
                     case "5":
                         Helpers.ShowHeaderAndClearScreen();
