@@ -114,7 +114,7 @@ namespace MathGame
 
                 string[] signs = ["+", "-", "*", "/"];
 
-                while (userInput == null || userInput == "")
+                while (string.IsNullOrWhiteSpace(userInput))
                 {
                     Console.Write($"{firstNumberFormatted} {signs[(int)gameType]} {secondNumberFormatted} = ");
                     userInput = Console.ReadLine().Trim();

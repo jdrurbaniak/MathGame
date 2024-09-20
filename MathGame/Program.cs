@@ -3,7 +3,7 @@
 string? playerName = null;
 var helpers = new Helpers();
 
-while (playerName == null || playerName == "")
+while (String.IsNullOrWhiteSpace(playerName))
 {
     Helpers.ShowHeaderAndClearScreen();
     Console.WriteLine("Please enter your name: ");
