@@ -158,7 +158,7 @@ namespace MathGame
                     Console.WriteLine($"Wrong answer! -{wrongAnswerPenalty} points");
                 }
 
-                if (playerScore > requiredScoreToWin)
+                if (playerScore >= requiredScoreToWin)
                 {
                     continuePlaying = false;
                     gamesList.Add(new Game {
